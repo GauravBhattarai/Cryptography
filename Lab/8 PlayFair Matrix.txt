@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<conio.h>
+int main()
+{
+  char arr[5][5], key[10], temp[26]="";
+  int i,j,flag=0, cnt=0, key_check[26]={};
+  printf("Enter your Keyword:");
+  scanf("%s",key);
+  for(i=0; i<strlen(key); i++)
+  {
+    key_check[key[i]%65]++;
+  }
+  for(i=0; i<26; i++)
+  {
+    if(key_check[i] > 1)
+     flag=1;
+  } 
+  if(flag==1)
+  {
+    printf("Enter proper keyword...\n");
+    exit(0);
+  }
+  else
+    printf("Keyword %s is ok.\n", key);
+
+ 
+  strcpy(arr,key);
+
+  for(i=0; i<26; i++)
+  {
+    if(key_check[i]==0)
+    {
+     temp[cnt++]=(char)key_check[i]+65+i;
+ 
+    }
+  }
+  temp[cnt]='\0';
+  strcat(arr,temp);
+
+  printf("Your Playfair Key Matrix:\n");
+  for(i=0; i<5; i++)
+  {
+    for(j=0; j<5; j++)
+      printf("%c ", arr[i][j]);
+    printf("\n");
+  }
+  return 0;
+}
